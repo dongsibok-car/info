@@ -178,69 +178,57 @@
             return new Blob([view], { type: 'audio/wav' });
         }
 
-        async function fetchAndPlayAudio(text) {
-            playAudioBtn.disabled = true;
-            audioIcon.classList.remove('fa-volume-up');
-            audioIcon.classList.add('spinner');
-            audioText.textContent = '음성 생성 중...';
+// 기존 fetchAndPlayAudio 함수를 아래 코드로 교체하세요.
 
-            const payload = {
-                contents: [{
-                    parts: [{ text: text }]
-                }],
-                generationConfig: {
-                    responseModalities: ["AUDIO"],
-                    speechConfig: {
-                        voiceConfig: {
-                            prebuiltVoiceConfig: { voiceName: "Kore" }
-                        }
-                    }
-                },
-                model: "gemini-2.5-flash-preview-tts"
-            };
+async function fetchAndPlayAudio(text) {
+    playAudioBtn.disabled = true;
+    audioIcon.classList.remove('fa-volume-up');
+    audioIcon.classList.add('spinner');
+    audioText.textContent = '음성 생성 중...';
 
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+    // 새로운 엔드포인트로 변경
+    const apiUrl = '/.netlify/functions/get-audio';
 
-            try {
-                const response = await fetch(proxyUrl + apiUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'x-requested-with': 'XMLHttpRequest'
-                    },
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                const part = result?.candidates?.[0]?.content?.parts?.[0];
-                const audioData = part?.inlineData?.data;
-                const mimeType = part?.inlineData?.mimeType;
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ posterContent: text })
+        });
 
-                if (audioData && mimeType && mimeType.startsWith("audio/")) {
-                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
-                    const pcmData = base64ToArrayBuffer(audioData);
-                    const wavBlob = pcmToWav(pcmData, sampleRate);
-                    const audioUrl = URL.createObjectURL(wavBlob);
-                    
-                    const audio = new Audio(audioUrl);
-                    audio.onended = () => {
-                        URL.revokeObjectURL(audioUrl);
-                        resetButtonState();
-                    };
-                    audio.onerror = (e) => {
-                        console.error('Audio playback error:', e);
-                        resetButtonState();
-                    };
-                    audio.play();
-                } else {
-                    console.error('API response did not contain valid audio data.');
-                    resetButtonState();
-                }
-            } catch (error) {
-                console.error('Error fetching audio:', error);
-                resetButtonState();
-            }
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        const audioData = await response.json();
+        const base64Data = audioData?.base64Audio;
+        const mimeType = audioData?.mimeType;
+
+        if (base64Data && mimeType && mimeType.startsWith("audio/")) {
+            const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+            const pcmData = base64ToArrayBuffer(base64Data);
+            const wavBlob = pcmToWav(pcmData, sampleRate);
+            const audioUrl = URL.createObjectURL(wavBlob);
+            
+            const audio = new Audio(audioUrl);
+            audio.onended = () => {
+                URL.revokeObjectURL(audioUrl);
+                resetButtonState();
+            };
+            audio.onerror = (e) => {
+                console.error('Audio playback error:', e);
+                resetButtonState();
+            };
+            audio.play();
+        } else {
+            console.error('API response did not contain valid audio data.');
+            resetButtonState();
+        }
+    } catch (error) {
+        console.error('Error fetching audio:', error);
+        resetButtonState();
+    }
+}
 
         function resetButtonState() {
             playAudioBtn.disabled = false;
@@ -273,3 +261,4 @@
     </script>
 </body>
 </html>
+
