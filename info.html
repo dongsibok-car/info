@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동대문시각특화장애인복지관 셔틀 운행 포스터</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F8F6F4;
+            color: #4A3C33;
+        }
+        .poster-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .btn-play-audio {
+            background-color: #7D4627;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-play-audio:hover {
+            background-color: #5C3F2E;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased p-4">
+    <div class="poster-container bg-amber-50 p-8 sm:p-12 text-center">
+        <header class="mb-10">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#7D4627] mb-2 drop-shadow-sm">
+                동대문시각특화장애인복지관
+            </h1>
+            <p class="text-xl sm:text-2xl font-bold text-amber-800">셔틀차량 운행 안내</p>
+        </header>
+
+        <main class="space-y-10 sm:space-y-12">
+            <button id="playAudioBtn" class="w-full btn-play-audio py-4 rounded-full font-bold text-xl flex items-center justify-center space-x-2">
+                <i class="fas fa-volume-up"></i>
+                <span>포스터 소리 듣기</span>
+            </button>
+            <section class="bg-white p-6 rounded-3xl border-4 border-[#F2C279] shadow-lg">
+                <h2 class="text-2xl sm:text-3xl font-black text-[#5C3F2E] mb-4">
+                    <i class="fas fa-bus-alt text-[#F2A65A] mr-3"></i>셔틀 운행 시간표
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-xl sm:text-2xl font-semibold">
+                    <div class="bg-[#FFEEDB] p-4 rounded-xl">
+                        <h3 class="font-bold text-[#7D4627] mb-2 text-2xl sm:text-3xl"><i class="fas fa-arrow-circle-down text-gray-500 mr-2"></i>복지관 방면</h3>
+                        <ul class="space-y-2 text-left px-4">
+                            <li><span class="font-extrabold">10:00</span> 출발 (회기역)</li>
+                            <li><span class="font-extrabold">13:30</span> 출발 (회기역)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-[#FFEEDB] p-4 rounded-xl">
+                        <h3 class="font-bold text-[#7D4627] mb-2 text-2xl sm:text-3xl"><i class="fas fa-arrow-circle-up text-gray-500 mr-2"></i>회기역 방면</h3>
+                        <ul class="space-y-2 text-left px-4">
+                            <li><span class="font-extrabold">13:10</span> 출발 (복지관)</li>
+                            <li><span class="font-extrabold">16:00</span> 출발 (복지관)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <div class="bg-orange-50 p-6 rounded-2xl shadow-inner border-2 border-orange-100">
+                    <h2 class="text-2xl sm:text-3xl font-black text-[#5C3F2E] mb-4">
+                        <i class="fas fa-info-circle text-orange-600 mr-3"></i>셔틀 이용 방법
+                    </h2>
+                    <ul class="space-y-4 text-xl sm:text-2xl font-semibold text-left px-4">
+                        <li class="flex items-center">
+                            <i class="fas fa-clipboard-list text-amber-700 text-3xl mr-4"></i>
+                            <p>사전 예약이 필수입니다.</p>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-user-plus text-amber-700 text-3xl mr-4"></i>
+                            <p>복지관 1층 접수대에서 신청해 주세요.</p>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-calendar-alt text-amber-700 text-3xl mr-4"></i>
+                            <p>매주 화요일 오후 5시에 마감됩니다.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border-4 border-[#F2C279] shadow-lg">
+                    <p class="text-2xl sm:text-3xl font-bold text-center text-[#7D4627]">
+                        <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>시각장애인 이용자 우선 탑승
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-10 border-t-2 border-[#7D4627] pt-6">
+            <p class="text-lg sm:text-xl font-bold text-[#7D4627]">
+                <i class="fas fa-leaf text-[#D97943] mr-2"></i>따뜻한 가을, 복지관과 함께하세요!
+            </p>
+            <p class="text-sm sm:text-md text-gray-600 mt-2">운행 구간: 복지관 ↔ 회기역 2번 출구 (왕복)</p>
+            <p class="text-sm sm:text-md text-gray-600 mt-1">문의: 동대문시각특화장애인복지관</p>
+        </footer>
+    </div>
+
+    <script>
+        const playAudioBtn = document.getElementById('playAudioBtn');
+        const audioIcon = playAudioBtn.querySelector('i');
+        const audioText = playAudioBtn.querySelector('span');
+
+        const mimeType = "audio/L16;rate=16000";
+        let audioContext;
+        let isPlaying = false;
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcmData, sampleRate) {
+            const wavData = new ArrayBuffer(44 + pcmData.byteLength);
+            const view = new DataView(wavData);
+
+            let offset = 0;
+            const writeString = (str) => {
+                for (let i = 0; i < str.length; i++) {
+                    view.setUint8(offset + i, str.charCodeAt(i));
+                }
+                offset += str.length;
+            };
+
+            writeString('RIFF');
+            view.setUint32(offset, 36 + pcmData.byteLength, true);
+            offset += 4;
+            writeString('WAVE');
+            writeString('fmt ');
+            view.setUint32(offset, 16, true);
+            offset += 4;
+            view.setUint16(offset, 1, true);
+            offset += 2;
+            view.setUint16(offset, 1, true);
+            offset += 2;
+            view.setUint32(offset, sampleRate, true);
+            offset += 4;
+            view.setUint32(offset, sampleRate * 2, true);
+            offset += 4;
+            view.setUint16(offset, 2, true);
+            offset += 2;
+            view.setUint16(offset, 16, true);
+            offset += 2;
+            writeString('data');
+            view.setUint32(offset, pcmData.byteLength, true);
+            offset += 4;
+
+            const pcmBytes = new Uint8Array(pcmData);
+            for (let i = 0; i < pcmBytes.length; i++) {
+                view.setUint8(offset + i, pcmBytes[i]);
+            }
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+
+        async function fetchAndPlayAudio(text) {
+            playAudioBtn.disabled = true;
+            audioIcon.classList.remove('fa-volume-up');
+            audioIcon.classList.add('spinner');
+            audioText.textContent = '음성 생성 중...';
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: text }]
+                }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Kore" }
+                        }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const wavBlob = pcmToWav(pcmData, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    const audio = new Audio(audioUrl);
+                    audio.onended = () => {
+                        URL.revokeObjectURL(audioUrl);
+                        resetButtonState();
+                    };
+                    audio.onerror = (e) => {
+                        console.error('Audio playback error:', e);
+                        resetButtonState();
+                    };
+                    audio.play();
+                } else {
+                    console.error('API response did not contain valid audio data.');
+                    resetButtonState();
+                }
+            } catch (error) {
+                console.error('Error fetching audio:', error);
+                resetButtonState();
+            }
+        }
+
+        function resetButtonState() {
+            playAudioBtn.disabled = false;
+            audioIcon.classList.remove('spinner');
+            audioIcon.classList.add('fa-volume-up');
+            audioText.textContent = '포스터 소리 듣기';
+        }
+
+        playAudioBtn.addEventListener('click', () => {
+            if (playAudioBtn.disabled) return;
+            const posterContent = `
+                동대문 시각특화 장애인 복지관, 셔틀차량 운행 안내.
+
+                셔틀 운행 시간표.
+                복지관 방면, 오전 10시 회기역 출발, 오후 1시 30분 회기역 출발.
+                회기역 방면, 오후 1시 10분 복지관 출발, 오후 4시 복지관 출발.
+
+                셔틀 이용 방법.
+                사전 예약이 필수입니다. 복지관 1층 접수대에서 신청해주세요.
+                매주 화요일 오후 5시에 마감됩니다.
+
+                중요. 시각장애인 이용자 우선 탑승.
+
+                따뜻한 가을, 복지관과 함께하세요!
+                운행 구간은 복지관과 회기역 2번 출구 왕복입니다.
+                문의는 동대문 시각특화 장애인 복지관으로 해주세요.
+            `.trim();
+            fetchAndPlayAudio(posterContent);
+        });
+    </script>
+</body>
+</html>
